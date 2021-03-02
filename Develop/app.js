@@ -13,22 +13,154 @@ const render = require("./lib/htmlRenderer");
 const members = [];
 const idArray = [];
 
-function createManager() {
-    inquirer.prompt([
-        {
-            type: 'input',
-            name: 'managerName',
-            message: "What is the manager's name?",
-            validate: answer => {
-                if (answer !== "") {
-                    return true;
+function menu() {
+    function createManager() {
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'managerName',
+                message: "What is the manager's name?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter at least one character.";
                 }
-                return "Please enter at least one character.";
+            },
+            {
+                type: 'input',
+                name: 'managerId',
+                message: "What is the manager's ID?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a valid ID number.";
+                }
+            },
+            {
+                type: 'input',
+                name: 'managerEmail',
+                message: "What is the manager's email?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a valid email address.";
+                }
+            },
+            {
+                type: 'input',
+                name: 'managerOffice',
+                message: "What is the manager's office number?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a valid office number.";
+                }
             }
-        }
-    ])
-}
+        ])
+    }
+    function createEngineer() {
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'engineerName',
+                message: "What is the engineer's name?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter at least one character.";
+                }
+            },
+            {
+                type: 'input',
+                name: 'engineerId',
+                message: "What is the engineer's ID?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a valid ID number.";
+                }
+            },
+            {
+                type: 'input',
+                name: 'engineerEmail',
+                message: "What is the engineer's email?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a valid email address.";
+                }
+            },
+            {
+                type: 'input',
+                name: 'engineerGithub',
+                message: "What is the engineer's GitHub username?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a valid GitHub username.";
+                }
+            }
+        ])
+    }
+    function createIntern() {
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'internName',
+                message: "What is the intern's name?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter at least one character.";
+                }
+            },
+            {
+                type: 'input',
+                name: 'internId',
+                message: "What is the intern's ID?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a valid ID number.";
+                }
+            },
+            {
+                type: 'input',
+                name: 'internEmail',
+                message: "What is the intern's email?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a valid email address.";
+                }
+            },
+            {
+                type: 'input',
+                name: 'internSchool',
+                message: "What is the name of the intern's school?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a valid school name.";
+                }
+            }
+        ])
+    }
+    }
 
+menu();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
