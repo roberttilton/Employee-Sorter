@@ -4,4 +4,4 @@ For this homework assignment, I built a command line application using Inquirer 
 
 ![screenshotofpage](/develop/assets/exampledemonstration.png)
 
-[Here's a link to a demonstration video.](link needs to go here)
+[Here's a link to a demonstration video.](https://www.youtube.com/watch?v=bAJ7oPvnkfQ)
