@@ -10,8 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const members = [];
-const idArray = [];
+const employees = [];
 
 function menu() {
     function createManager() {
@@ -59,12 +58,23 @@ function menu() {
                     }
                     return "Please enter a valid office number.";
                 }
+            },
+            {
+                type: 'confirm',
+                name: 'repeatManager',
+                message: 'Would you like to add another manager?'
             }
         ])
-        .then ((data) => {
-            createEngineer();
-            
-        })
+            .then((data) => {
+                // create objects for each type of employee
+                let managerObj = new Manager(data.managerName, data.managerId, data.managerEmail, data.managerOffice)
+                employees.push(managerObj);
+                if (data.repeatManager == true) {
+                    createManager();
+                } else {
+                    createEngineer();
+                }
+            })
     }
     function createEngineer() {
         inquirer.prompt([
@@ -111,11 +121,22 @@ function menu() {
                     }
                     return "Please enter a valid GitHub username.";
                 }
+            },
+            {
+                type: 'confirm',
+                name: 'repeatEngineer',
+                message: 'Would you like to add another engineer?'
             }
         ])
-        .then ((data) => {
-            createIntern();
-        })
+            .then((data) => {
+                let engineerObj = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.engineerGithub)
+                employees.push(engineerObj);
+                if (data.repeatEngineer == true) {
+                    createEngineer();
+                } else {
+                    createIntern();
+                }
+            })
     }
     function createIntern() {
         inquirer.prompt([
@@ -162,20 +183,41 @@ function menu() {
                     }
                     return "Please enter a valid school name.";
                 }
+            },
+            {
+                type: 'confirm',
+                name: 'repeatIntern',
+                message: "Would you like to add another intern?",
             }
-        ])
+        ]).then(function (data) {
+            let internObj = new Intern(data.internName, data.internId, data.internEmail, data.internSchool)
+            employees.push(internObj);
+            console.log(employees);
+
+            if (data.repeatIntern == true){
+                createIntern();
+            } else {
+                fs.writeFile(outputPath, render(employees), function (err) {
+                    if (err) throw err;
+                    console.log('Saved!');
+                  });
+            }
+
+
+        })
     }
     createManager();
-    }
-
+}
+// create a inquirer prompt function to ask users if they want to add more members
 menu();
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
-render();
+
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
